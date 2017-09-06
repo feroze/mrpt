@@ -21,6 +21,11 @@ class DETECTORS_IMPEXP CMarkerDetection : public CObjectDetection
 {
    public:
      void testObject();
+			void init(const mrpt::utils::CConfigFileBase &cfg) {
+      };
+			void detectObjects_Impl( const mrpt::obs::CObservation *obs, vector_detectable_object &detected)
+			{
+      };
 };  // End of class
 }
 }
