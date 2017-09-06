@@ -1,4 +1,6 @@
-IF(CMAKE_MRPT_HAS_OPENCV)
+IF(CMAKE_MRPT_HAS_MRPT)
+  INCLUDE_DIRECTORIES(${ARUCO_INCLUDE_DIRS}) # Aruco includes already contains opencv includes
+ELSEIF(CMAKE_MRPT_HAS_OPENCV)
 	INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIR} ${OpenCV_INCLUDE_DIRS} ${OPENCV_INCLUDE_DIRS} ${OPENCV_INCLUDEDIR})
 ENDIF()
 
@@ -21,7 +23,9 @@ define_mrpt_lib(
 	)
 
 IF(BUILD_mrpt-detectors)
-	IF(CMAKE_MRPT_HAS_OPENCV)
+  IF(CMAKE_MRPT_HAS_MRPT)
+    target_link_libraries(mrpt-detectors ${ARUCO_LIBRARIES}) # Aruco library already contains opencv libraries
+  ELSEIF(CMAKE_MRPT_HAS_OPENCV)
 		target_link_libraries(mrpt-detectors ${OpenCV_LIBRARIES})
 	ENDIF()
 
