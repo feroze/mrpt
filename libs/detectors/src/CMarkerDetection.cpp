@@ -7,14 +7,31 @@
    | Released under BSD License. See details in http://www.mrpt.org/License |
    +------------------------------------------------------------------------+ */
 
-#ifndef _mrpt_detectors_H
-#define _mrpt_detectors_H
+#include "detectors-precomp.h"  // Precompiled headers
+#include <mrpt/gui.h>
+#include <mrpt/maps/CColouredPointsMap.h>
 
-#include <mrpt/detectors/CDetectableObject.h>
-#include <mrpt/detectors/CObjectDetection.h>
-#include <mrpt/detectors/CCascadeClassifierDetection.h>
-#include <mrpt/detectors/CFaceDetection.h>
-#include <mrpt/detectors/CDetectorDoorCrossing.h>
+#include <mrpt/math.h>
+
+// Universal include for all versions of OpenCV
+#include <mrpt/otherlibs/do_opencv_includes.h>
+
 #include <mrpt/detectors/CMarkerDetection.h>
 
-#endif
+using namespace std;
+using namespace mrpt;
+using namespace mrpt::detectors;
+using namespace mrpt::math;
+using namespace mrpt::gui;
+using namespace mrpt::math;
+using namespace mrpt::utils;
+using namespace mrpt::opengl;
+using namespace mrpt::system;
+using namespace mrpt::maps;
+using namespace mrpt::obs;
+
+
+void CMarkerDetection::testObject()
+{
+  cout << "Testing Object";
+}

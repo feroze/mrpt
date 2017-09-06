@@ -7,14 +7,22 @@
    | Released under BSD License. See details in http://www.mrpt.org/License |
    +------------------------------------------------------------------------+ */
 
-#ifndef _mrpt_detectors_H
-#define _mrpt_detectors_H
+#ifndef CMarkerDetection_H
+#define CMarkerDetection_H
 
-#include <mrpt/detectors/CDetectableObject.h>
 #include <mrpt/detectors/CObjectDetection.h>
-#include <mrpt/detectors/CCascadeClassifierDetection.h>
-#include <mrpt/detectors/CFaceDetection.h>
-#include <mrpt/detectors/CDetectorDoorCrossing.h>
-#include <mrpt/detectors/CMarkerDetection.h>
+
+namespace mrpt
+{
+/** \ingroup mrpt_detectors_grp  */
+namespace detectors
+{
+class DETECTORS_IMPEXP CMarkerDetection : public CObjectDetection
+{
+   public:
+     void testObject();
+};  // End of class
+}
+}
 
 #endif
