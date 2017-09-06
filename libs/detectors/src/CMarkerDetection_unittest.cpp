@@ -16,13 +16,19 @@ using namespace std;
 // document source of simple image here
 
 string cameraConfigFile( MRPT_SOURCE_BASE_DIRECTORY + string("/share/mrpt/datasets/markerdetection-tests/intrinsics.yml") );
+string testImageFile( MRPT_SOURCE_BASE_DIRECTORY + string("/share/mrpt/datasets/markerdetection-tests/image-test.png") );
 
 TEST(MarkerDetection, test)
 {
   CMarkerDetection markerObject;
-  cout << "\n\n";
-  markerObject.testObject();
-  cout << "\n\n";
 
   markerObject.init(cameraConfigFile);
+
+  CObservationImage obsImg;
+  CImage img;
+  img.loadFromFile(testImageFile);
+  obsImg.image = img;
+
+	vector_detectable_object markers;
+  markerObject.detectObjects_Impl(&obsImg, markers);
 }

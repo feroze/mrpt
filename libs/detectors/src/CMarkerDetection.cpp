@@ -35,11 +35,6 @@ using namespace mrpt::obs;
 PIMPL_IMPLEMENT(aruco::MarkerDetector);
 PIMPL_IMPLEMENT(aruco::CameraParameters);
 
-void CMarkerDetection::testObject()
-{
-  cout << "Testing Object";
-}
-
 void CMarkerDetection::init(const std::string &cameraConfigFile)
 {
   PIMPL_CONSTRUCT(aruco::MarkerDetector, m_aruco_marker_detector);
@@ -56,10 +51,18 @@ void CMarkerDetection::init(const std::string &cameraConfigFile)
 
 void CMarkerDetection::detectObjects_Impl(const mrpt::obs::CObservation *obs, vector_detectable_object &detected)
 {
-//vector<aruco::Marker> markers = PIMPL_GET_REF(aruco::MarkerDetector,
-												 //m_aruco_detector).detect(matImage,
-												 //PIMPL_GET_REF(aruco::CameraParameters, m_aruco_cam_param),
-												 //m_marker_size);
+  const CObservationImage *obsImg = static_cast<const CObservationImage*>(obs);
+
+  // Convert to IplImage and copy it
+  const IplImage *image = (&obsImg->image)->getAs<IplImage>();
+
+  cv::Mat matImage = cv::cvarrToMat(image);
+
+  vector<aruco::Marker> markers = PIMPL_GET_REF(aruco::MarkerDetector, m_aruco_marker_detector) \
+                                  .detect(matImage, PIMPL_GET_REF(aruco::CameraParameters, m_aruco_camera_parameters), 0.05);
+
+  cout << "\n\nStarted from the bottom now we're at the top\n\n";
+  cout << markers;
 }
 
 #endif
