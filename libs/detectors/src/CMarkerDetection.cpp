@@ -35,12 +35,62 @@ using namespace mrpt::obs;
 PIMPL_IMPLEMENT(aruco::MarkerDetector);
 PIMPL_IMPLEMENT(aruco::CameraParameters);
 
+CMarkerDetection::TMarkerOptions::TMarkerOptions()
+{
+  // get default aruco params and set TMarkerOptions to avoid duplicating values
+  //PIMPL_CONSTRUCT(aruco::MarkerDetector, m_aruco_marker_detector);
+  //aruco::MarkerDetector::Params defaultParams;
+  //PIMPL_GET_REF(aruco::MarkerDetector, m_aruco_marker_detector).getParams(defaultParams);
+}
+
+/*---------------------------------------------------------------
+					loadFromConfigFile
+  ---------------------------------------------------------------*/
+void CMarkerDetection::TMarkerOptions::loadFromConfigFile(
+	const mrpt::utils::CConfigFileBase& iniFile, const std::string& section)
+{
+  MRPT_LOAD_CONFIG_VAR(_thresParam1, double, iniFile, section);
+  //MRPT_LOAD_CONFIG_VAR(_thresParam2, double, iniFile, section);
+  //MRPT_LOAD_CONFIG_VAR(_thresParam1_range, double, iniFile, section);
+
+  //MRPT_LOAD_CONFIG_VAR(_subpix_wsize, int, iniFile, section);
+  //MRPT_LOAD_CONFIG_VAR(_markerWarpSize, int, iniFile, section);
+  //MRPT_LOAD_CONFIG_VAR(_borderDistThres, float, iniFile, section);
+  //MRPT_LOAD_CONFIG_VAR(_minSize, float, iniFile, section);
+  //MRPT_LOAD_CONFIG_VAR(_maxSize, float, iniFile, section);
+
+  //MRPT_LOAD_CONFIG_VAR(_minSize_pix, int, iniFile, section);
+}
+
+/*---------------------------------------------------------------
+					dumpToTextStream
+  ---------------------------------------------------------------*/
+void CMarkerDetection::TMarkerOptions::dumpToTextStream(
+	mrpt::utils::CStream& out) const
+{
+	out.printf(
+		"\n----------- [CMarkerDetection::TMarkerOptions] ------------ "
+		"\n\n");
+
+	//LOADABLEOPTS_DUMP_VAR(mapAltitude, float)
+
+	out.printf("\n");
+}
+
+
+void init(const mrpt::utils::CConfigFileBase &markerCfg )
+{
+      //markerOptions.loadFromConfigFile(markerCfg, "Marker_Options"); // this should load values from .ini into markeroptions class
+
+      // now set the values
+}
+
 void CMarkerDetection::init(const std::string &cameraConfigFile)
 {
   PIMPL_CONSTRUCT(aruco::MarkerDetector, m_aruco_marker_detector);
   PIMPL_CONSTRUCT(aruco::CameraParameters, m_aruco_camera_parameters);
 
-  //// set values of aruco detector parameters taken from aruco_simple.cpp. Remaining is left default
+  // set values of aruco detector parameters taken from aruco_simple.cpp. Remaining is left default
   PIMPL_GET_REF(aruco::MarkerDetector, m_aruco_marker_detector).setThresholdParams(7,7);
   PIMPL_GET_REF(aruco::MarkerDetector, m_aruco_marker_detector).setThresholdParamRange(2,0);
 
